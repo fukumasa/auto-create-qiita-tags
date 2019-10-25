@@ -1,6 +1,7 @@
 janome
 nltk
 beautifulsoup4
+requests
 lxml
 Flask
 jinja2

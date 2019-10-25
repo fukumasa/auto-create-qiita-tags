@@ -1,0 +1,6 @@
+janome
+nltk
+beautifulsoup4
+lxml
+Flask
+jinja2

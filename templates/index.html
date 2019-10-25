@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <form action="/" method="POST">
+        <input type="text" name="url" size="50"></input>
+        <input type="submit" value="タグ生成"></input>
+    </form>
+
+    <h3>Now >>></h3>
+
+    <table border="1" style="border-collapse: collapse">
+        {% if items %}
+        <tr>
+            <th>タグ名</th>
+            <th>フォロワー数</th>
+            <th>重要度</th>
+        </tr>
+        {% endif %}
+        {% for item in items %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.value}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h3>AI Create >>></h3>
+
+    <table border="1" style="border-collapse: collapse">
+        {% if items2 %}
+        <tr>
+            <th>タグ名</th>
+            <th>フォロワー数</th>
+            <th>重要度</th>
+        </tr>
+        {% endif %}
+        {% for item2 in items2 %}
+        <tr>
+            <td>{{item2.id}}</td>
+            <td>{{item2.count}}</td>
+            <td>{{item2.value}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+
+</html>

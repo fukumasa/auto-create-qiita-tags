@@ -8,50 +8,138 @@
 
 <body>
     <form action="/" method="POST">
-        <input type="text" name="url" size="50"></input>
+        <input type="text" name="url" size="70"></input>
         <input type="submit" value="タグ生成"></input>
     </form>
 
-    <h3>Now >>></h3>
+    <p class="error-Tags">{{ error_msg }}</p>
 
+    <h3>自動生成されたタグ</h3>
+    <h4>order by 重要度</h4>
+
+    <div class="it-Tags">
+        {% for tag in tags1 %}
+        <span class="it-Tags_item">{{tag.name}}</span>
+        {% endfor %}
+    </div>
+
+    <p>
     <table border="1" style="border-collapse: collapse">
-        {% if items %}
+        <tbody>
+        {% if tags1 %}
         <tr>
             <th>タグ名</th>
             <th>フォロワー数</th>
             <th>重要度</th>
+            <th>記事数</th>
         </tr>
         {% endif %}
-        {% for item in items %}
+        {% for tag in tags1 %}
         <tr>
-            <td>{{item.id}}</td>
-            <td>{{item.count}}</td>
-            <td>{{item.value}}</td>
+            <td>{{tag.name}}</td>
+            <td>{{tag.followers}}</td>
+            <td>{{tag.value}}</td>
+            <td>{{tag.counts}}</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
+    </p>
 
 
-    <h3>AI Create >>></h3>
+    <h4>order by フォロワー数</h4>
 
+    <div class="it-Tags">
+        {% for tag in tags2 %}
+        <span class="it-Tags_item">{{tag.name}}</span>
+        {% endfor %}
+    </div>
+
+    <p>
     <table border="1" style="border-collapse: collapse">
-        {% if items2 %}
+        <tbody>
+        {% if tags2 %}
         <tr>
             <th>タグ名</th>
             <th>フォロワー数</th>
             <th>重要度</th>
+            <th>記事数</th>
         </tr>
         {% endif %}
-        {% for item2 in items2 %}
+        {% for tag in tags2 %}
         <tr>
-            <td>{{item2.id}}</td>
-            <td>{{item2.count}}</td>
-            <td>{{item2.value}}</td>
+            <td>{{tag.name}}</td>
+            <td>{{tag.followers}}</td>
+            <td>{{tag.value}}</td>
+            <td>{{tag.counts}}</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
+    </p>
 
 
+    <h4>order by 記事数</h4>
+
+    <div class="it-Tags">
+        {% for tag in tags3 %}
+        <span class="it-Tags_item">{{tag.name}}</span>
+        {% endfor %}
+    </div>
+
+    <p>
+    <table border="1" style="border-collapse: collapse">
+        <tbody>
+        {% if tags3 %}
+        <tr>
+            <th>タグ名</th>
+            <th>フォロワー数</th>
+            <th>重要度</th>
+            <th>記事数</th>
+        </tr>
+        {% endif %}
+        {% for tag in tags3 %}
+        <tr>
+            <td>{{tag.name}}</td>
+            <td>{{tag.followers}}</td>
+            <td>{{tag.value}}</td>
+            <td>{{tag.counts}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </p>
+
+
+    <h3>現在登録されているタグ</h3>
+
+    <div class="it-Tags">
+        {% for tag in tags4 %}
+        <span class="it-Tags_item">{{tag.name}}</span>
+        {% endfor %}
+    </div>
+
+    <p>
+    <table border="1" style="border-collapse: collapse">
+        <tbody>
+        {% if tags4 %}
+        <tr>
+            <th>タグ名</th>
+            <th>フォロワー数</th>
+            <th>重要度</th>
+            <th>記事数</th>
+        </tr>
+        {% endif %}
+        {% for tag in tags4 %}
+        <tr>
+            <td>{{tag.name}}</td>
+            <td>{{tag.followers}}</td>
+            <td>{{tag.value}}</td>
+            <td>{{tag.counts}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </p>
 </body>
-
 </html>

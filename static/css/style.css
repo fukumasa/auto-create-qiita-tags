@@ -1,18 +1,90 @@
-table{
-  border-collapse:collapse;
-  margin:0 auto;
-}
-td,th{
-  padding:10px;
-}
-th{
-  color:#fff;
-  background:#16ad43b0;
-}
-table tr:nth-child(odd){
-  background:#e6ffe9;
+table {
+  margin: 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: 1px solid #666;
+  border-spacing: 0;
+  overflow: hidden;
 }
 
-tr:last-child{
-  font-weight: bold;
+td,
+th {
+  border-bottom: 1px solid #666;
+}
+
+td,
+th {
+  padding: 10px;
+}
+
+th {
+  background: #EFEFEF;
+}
+
+table tbody tr:last-child th,
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+th+th,
+td {
+  border-left: 1px solid #666;
+}
+
+.error-Tags {
+  color: red;
+  font: bold;
+}
+
+.it-Tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.it-Tags_item {
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  margin-right: 8px;
+}
+
+h4 {
+  border-bottom: solid 3px #cce4ff;
+  position: relative;
+}
+
+h3 {
+  padding: 0.5em;
+  /*文字周りの余白*/
+  color: #010101;
+  /*文字色*/
+  background: #eaf3ff;
+  /*背景色*/
+  border-bottom: solid 3px #516ab6;
+  /*下線*/
+}
+
+.btn-square {
+  width: 100px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #FFFFFF;
+  background: #008DDD;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  /* for Safari and Chrome 対応*/
+  -moz-border-radius: 5px;
+  /* for Firefox 対応*/
+}
+
+.text {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 14px;
 }

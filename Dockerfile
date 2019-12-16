@@ -15,5 +15,3 @@ RUN pip install -r requirements.txt
 
 ENV FLASK_APP /work/auto-create-qiita-tags/app.py
 CMD flask run -h 0.0.0.0 -p $PORT
-
-EXPOSE $PORT

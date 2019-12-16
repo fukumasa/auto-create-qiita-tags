@@ -13,5 +13,7 @@ RUN git clone https://github.com/fukumasa/auto-create-qiita-tags
 WORKDIR /work/auto-create-qiita-tags
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "app.py"]
-EXPOSE 5000
+ENV FLASK_APP /work/auto-create-qiita-tags/app.py
+CMD flask run -h 0.0.0.0 -p $PORT
+
+EXPOSE $PORT

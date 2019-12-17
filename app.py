@@ -12,7 +12,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # タグ情報を格納するDB
-db_name = "./database/tags.db"
+db_name = "./database/tags2.db"
 
 
 '''
@@ -39,7 +39,8 @@ def createTags(text):
     
     # 抽出した専門用語を1つずつ取得
     for cmp_noun, value in data_collection.most_common():
-        word = termextract.core.modify_agglutinative_lang(cmp_noun).lower()
+        #word = termextract.core.modify_agglutinative_lang(cmp_noun).lower()
+        word = termextract.core.modify_agglutinative_lang(cmp_noun)
         
         # Qiitaに登録済みのタグか確認
         rows = cursor.execute(sql,(word,))
@@ -98,7 +99,7 @@ def extractTags(url, all_tags):
     # Qiitaの記事に現在登録されているタグを取得
     for keyword in soup.find('meta', attrs={'name':'keywords'}).get('content').split(','):
         #タグの情報を取得
-        keyword = keyword.lower()
+        #keyword = keyword.lower()
         rows = cursor.execute(sql,(keyword,))
         res = cursor.fetchone()
         followers = int(res[1]) if res else 0
@@ -124,7 +125,7 @@ def showApp():
     if request.method == 'POST':
         url = request.form['url']
         if not url.startswith('https://qiita.com'):
-            return render_template('index.html', title='Qiitaタグ自動生成', error_msg='QiitaのURLを指定してね')
+            return render_template('index.html', title='Qiitaタグ自動生成', error_msg='Qiitaの記事URLを指定してね')
     elif request.method == 'GET':
         return render_template('index.html', title='Qiitaタグ自動生成')
 
@@ -133,7 +134,12 @@ def showApp():
     tags_auto_value = sorted(all_tags, key=lambda tag: tag['value'], reverse=True)[0:5]
     tags_auto_followers = sorted(all_tags, key=lambda tag: tag['followers'], reverse=True)[0:5]
     tags_auto_counts = sorted(all_tags, key=lambda tag: tag['counts'], reverse=True)[0:5]    
-    tags_now = extractTags(url, all_tags)
+
+    try:
+        tags_now = extractTags(url, all_tags)
+    except AttributeError:
+        return render_template('index.html', title='Qiitaタグ自動生成', error_msg='Qiitaの記事URLを指定してね')
+
     return render_template('index.html', title='Qiitaタグ自動生成', tags1=tags_auto_value, tags2=tags_auto_followers, tags3 = tags_auto_counts, tags4=tags_now)
 
 

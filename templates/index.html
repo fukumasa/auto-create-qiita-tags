@@ -2,16 +2,18 @@
 <html>
 
 <head>
-    <title>{{ title }}</title>
+    <title>Qiitaタグ自動生成</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script type="text/javascript" src="/static/js/index.js"></script>
 </head>
 
 <body>
     <form action="/" method="POST">
-        <input type="text" name="url" size="70"></input>
+        <input type="text" name="url" size="70" placeholder="Qiita記事URL"></input>
         <input type="submit" value="タグ生成"></input>
     </form>
+
+    <h2><a href={{ qiita_url }} target=”_blank”>{{ title }}</a></h2>
 
     <p class="error-Tags">{{ error_msg }}</p>
 

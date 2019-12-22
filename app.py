@@ -64,6 +64,7 @@ Qiitaの記事から内容を抽出する
 '''
 def extractText(url):
     text = ''
+    title = ''
 
     r = requests.get(url) 
     soup = BeautifulSoup(r.text, 'lxml')
@@ -75,8 +76,12 @@ def extractText(url):
     #記事内容を抽出
     for tag in soup.find_all('section'):
         text += tag.getText()
+
+    #タイトルを抽出
+    for tag in soup.find_all('h1',{'class':'it-Header_title'}):
+        title = tag.getText()
         
-    return text
+    return text,title
 
 
 '''
@@ -125,11 +130,11 @@ def showApp():
     if request.method == 'POST':
         url = request.form['url']
         if not url.startswith('https://qiita.com'):
-            return render_template('index.html', title='Qiitaタグ自動生成', error_msg='Qiitaの記事URLを指定してね')
+            return render_template('index.html', error_msg='Qiitaの記事URLを指定してね')
     elif request.method == 'GET':
-        return render_template('index.html', title='Qiitaタグ自動生成')
+        return render_template('index.html')
 
-    text = extractText(url)
+    text,title = extractText(url)
     all_tags = createTags(text)
     tags_auto_value = sorted(all_tags, key=lambda tag: tag['value'], reverse=True)[0:5]
     tags_auto_followers = sorted(all_tags, key=lambda tag: tag['followers'], reverse=True)[0:5]
@@ -138,9 +143,9 @@ def showApp():
     try:
         tags_now = extractTags(url, all_tags)
     except AttributeError:
-        return render_template('index.html', title='Qiitaタグ自動生成', error_msg='Qiitaの記事URLを指定してね')
+        return render_template('index.html', error_msg='Qiitaの記事URLを指定してね')
 
-    return render_template('index.html', title='Qiitaタグ自動生成', tags1=tags_auto_value, tags2=tags_auto_followers, tags3 = tags_auto_counts, tags4=tags_now)
+    return render_template('index.html', tags1=tags_auto_value, tags2=tags_auto_followers, tags3 = tags_auto_counts, tags4=tags_now, qiita_url=url, title=title)
 
 
 """
